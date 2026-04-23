@@ -128,18 +128,17 @@ export default function MagazineViewer() {
             onPointerUp={handlePointerUp}
           >
             {pagesToShow.map((pageNum) => (
-              <div key={pageNum} className="bg-white">
+              <div
+                key={pageNum}
+                className="bg-white overflow-hidden"
+                style={{ width: pageWidth, height: pageHeight, flexShrink: 0 }}
+              >
                 <Page
                   pageNumber={pageNum}
                   width={pageWidth}
                   renderAnnotationLayer={false}
                   renderTextLayer={false}
-                  loading={
-                    <div
-                      className="bg-gray-800 animate-pulse"
-                      style={{ width: pageWidth, height: pageHeight }}
-                    />
-                  }
+                  loading={null}
                 />
               </div>
             ))}
