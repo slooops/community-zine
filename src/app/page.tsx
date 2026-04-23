@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, Mail } from 'lucide-react';
+import { ArrowRight, Newspaper } from 'lucide-react';
 import type { Metadata } from 'next';
-import { btnPrimary, btnOutline, btnDark } from '@/components/Button';
+import { btnDark } from '@/components/Button';
 
 export const metadata: Metadata = {
   title: "ComMunity — SF's Transit Magazine",
@@ -49,13 +49,19 @@ export default function LandingPage() {
             copies mailed to you and fund Issue 3.
           </p>
 
-          {/* Buttons — full width of the container = same width as wordmark */}
-          <div className="w-full flex flex-col gap-2">
-            <Link href="/read" className={`${btnPrimary} w-full py-3`}>
-              Read Free Online <ArrowRight size={15} strokeWidth={2.5} />
+          {/* Buttons — frosted glass row */}
+          <div className="flex flex-row gap-2.5 w-full">
+            <Link
+              href="/read"
+              className="flex-1 flex items-center justify-center gap-2 rounded-none backdrop-blur-md bg-[#D94550]/30 border border-[#D94550]/50 text-white font-semibold text-sm py-3 px-4 hover:bg-[#D94550]/45 transition"
+            >
+              Read Free <ArrowRight size={14} strokeWidth={2.5} />
             </Link>
-            <Link href="/subscribe" className={`${btnOutline} w-full py-3`}>
-              Get Print Copy <Mail size={15} strokeWidth={2} />
+            <Link
+              href="/subscribe"
+              className="flex-1 flex items-center justify-center gap-2 rounded-none backdrop-blur-md bg-white/10 border border-white/20 text-white font-semibold text-sm py-3 px-4 hover:bg-white/[0.16] transition"
+            >
+              Get Print <Newspaper size={14} strokeWidth={2} />
             </Link>
           </div>
 
@@ -90,7 +96,7 @@ export default function LandingPage() {
               href="/subscribe"
               className="inline-flex items-center justify-center gap-2 rounded-none border border-gray-900 text-gray-900 font-semibold text-sm px-5 py-3 hover:bg-gray-100 transition"
             >
-              Subscribe for $5/month <Mail size={14} strokeWidth={2} />
+              Subscribe for $5/month <Newspaper size={14} strokeWidth={2} />
             </Link>
           </div>
         </div>

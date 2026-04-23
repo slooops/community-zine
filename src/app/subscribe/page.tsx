@@ -1,6 +1,14 @@
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
+import { Barlow_Condensed } from 'next/font/google';
 import SubscribeForm from '@/components/SubscribeForm';
+
+const barlowCondensed = Barlow_Condensed({
+  weight: ['700'],
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 export const metadata = {
   title: 'Subscribe — ComMunity Magazine',
@@ -17,15 +25,15 @@ export default function SubscribePage() {
         </Link>
         <Link
           href="/read"
-          className="text-xs font-semibold text-gray-400 hover:text-white transition flex items-center gap-1"
+          className="text-xs font-semibold text-gray-400 hover:text-white transition flex items-center gap-1.5"
         >
-          Read free online <ArrowUpRight size={12} strokeWidth={2.5} />
+          Read free online <BookOpen size={12} strokeWidth={2.5} />
         </Link>
       </header>
 
       <main className="max-w-lg mx-auto px-4 py-12">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-3">
+          <h1 className={`${barlowCondensed.className} text-5xl font-bold text-white mb-3 leading-tight`}>
             Get <em>COMMUNITY</em> in your mailbox
           </h1>
           <p className="text-gray-400 text-base leading-relaxed">

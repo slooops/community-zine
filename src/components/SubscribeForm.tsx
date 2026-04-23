@@ -84,7 +84,7 @@ export default function SubscribeForm() {
             required
             value={form.name}
             onChange={set('name')}
-            className={inputClass}
+            className={`${inputClass} w-full`}
             placeholder="Jane Smith"
           />
         </div>
@@ -95,7 +95,7 @@ export default function SubscribeForm() {
             type="email"
             value={form.email}
             onChange={set('email')}
-            className={inputClass}
+            className={`${inputClass} w-full`}
             placeholder="jane@example.com"
           />
         </div>
@@ -110,7 +110,7 @@ export default function SubscribeForm() {
             required
             value={form.line1}
             onChange={set('line1')}
-            className={inputClass}
+            className={`${inputClass} w-full`}
             placeholder="123 Castro St"
           />
         </div>
@@ -122,7 +122,7 @@ export default function SubscribeForm() {
           <input
             value={form.line2}
             onChange={set('line2')}
-            className={inputClass}
+            className={`${inputClass} w-full`}
             placeholder="Apt 4B"
           />
         </div>
@@ -133,7 +133,7 @@ export default function SubscribeForm() {
               required
               value={form.city}
               onChange={set('city')}
-              className={inputClass}
+              className={`${inputClass} w-full`}
               placeholder="San Francisco"
             />
           </div>
@@ -144,7 +144,7 @@ export default function SubscribeForm() {
               value={form.state}
               onChange={set('state')}
               maxLength={2}
-              className={`${inputClass} uppercase`}
+              className={`${inputClass} w-full uppercase`}
               placeholder="CA"
             />
           </div>
@@ -155,7 +155,7 @@ export default function SubscribeForm() {
             required
             value={form.zip}
             onChange={set('zip')}
-            className={inputClass}
+            className={`${inputClass} w-full`}
             placeholder="94114"
             maxLength={10}
           />

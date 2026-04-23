@@ -76,7 +76,7 @@ export default function AmountSelector({ value, onChange }: Props) {
             placeholder="Amount"
             value={inputVal}
             onChange={handleCustomChange}
-            className={`${inputClass} w-32`}
+            className={`${inputClass} w-28`}
             autoFocus
           />
           <span className="text-gray-500 text-sm">/month</span>
