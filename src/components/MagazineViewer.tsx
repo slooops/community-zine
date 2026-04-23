@@ -16,9 +16,7 @@ export default function MagazineViewer() {
   const [pageWidth, setPageWidth] = useState(380);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-  const [fading, setFading] = useState(false);
   const swipeStartX = useRef<number | null>(null);
-  const fadeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const isMobile = pageWidth < 640;
 
@@ -48,24 +46,14 @@ export default function MagazineViewer() {
     setLoading(false);
   };
 
-  // Navigate with a quick opacity fade — fade out, swap page, fade in
-  const navigate = useCallback(
-    (direction: 'prev' | 'next') => {
-      if (fadeTimer.current) clearTimeout(fadeTimer.current);
-      setFading(true);
-      fadeTimer.current = setTimeout(() => {
-        setCurrentPage((p) => {
-          if (direction === 'prev') return Math.max(1, isMobile ? p - 1 : p - 2);
-          return Math.min(numPages, isMobile ? p + 1 : p + 2);
-        });
-        setFading(false);
-      }, 110); // slightly longer than the 100ms CSS transition
-    },
+  const prev = useCallback(
+    () => setCurrentPage((p) => Math.max(1, isMobile ? p - 1 : p - 2)),
+    [isMobile],
+  );
+  const next = useCallback(
+    () => setCurrentPage((p) => Math.min(numPages, isMobile ? p + 1 : p + 2)),
     [isMobile, numPages],
   );
-
-  const prev = useCallback(() => navigate('prev'), [navigate]);
-  const next = useCallback(() => navigate('next'), [navigate]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -120,10 +108,9 @@ export default function MagazineViewer() {
           loading={null}
           className={loading ? 'hidden' : ''}
         >
-          {/* Fade wrapper + swipe target */}
+          {/* Swipe target */}
           <div
             className="flex gap-2 shadow-2xl cursor-grab active:cursor-grabbing"
-            style={{ opacity: fading ? 0 : 1, transition: 'opacity 0.1s ease' }}
             onPointerDown={handlePointerDown}
             onPointerUp={handlePointerUp}
           >
