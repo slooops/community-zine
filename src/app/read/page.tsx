@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import { btnPrimary } from '@/components/Button';
 
 const MagazineViewer = dynamic(() => import('@/components/MagazineViewer'), { ssr: false });
 
@@ -17,10 +18,7 @@ export default function ReadPage() {
         <Link href="/">
           <img src="/seal-white-sm.png" alt="ComMunity" className="h-7 opacity-90" />
         </Link>
-        <Link
-          href="/subscribe"
-          className="bg-[#D94550] text-white font-semibold px-3 py-1.5 text-xs hover:bg-[#c23a46] transition flex items-center gap-1.5"
-        >
+        <Link href="/subscribe" className={`${btnPrimary} px-3 py-1.5 text-xs`}>
           Get Print Copy <ArrowRight size={12} strokeWidth={2.5} />
         </Link>
       </header>

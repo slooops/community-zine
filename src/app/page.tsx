@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, Mail } from 'lucide-react';
 import type { Metadata } from 'next';
+import { btnPrimary, btnOutline, btnDark } from '@/components/Button';
 
 export const metadata: Metadata = {
   title: "ComMunity — SF's Transit Magazine",
@@ -50,16 +51,10 @@ export default function LandingPage() {
 
           {/* Buttons — full width of the container = same width as wordmark */}
           <div className="w-full flex flex-col gap-2">
-            <Link
-              href="/read"
-              className="w-full bg-[#D94550] text-white font-bold text-sm py-3 flex items-center justify-center gap-2 hover:bg-[#c23a46] transition"
-            >
+            <Link href="/read" className={`${btnPrimary} w-full py-3`}>
               Read Free Online <ArrowRight size={15} strokeWidth={2.5} />
             </Link>
-            <Link
-              href="/subscribe"
-              className="w-full border border-white text-white font-bold text-sm py-3 flex items-center justify-center gap-2 hover:bg-white hover:text-gray-900 transition"
-            >
+            <Link href="/subscribe" className={`${btnOutline} w-full py-3`}>
               Get Print Copy <Mail size={15} strokeWidth={2} />
             </Link>
           </div>
@@ -88,15 +83,12 @@ export default function LandingPage() {
             toward printing Issue 3.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 pt-2">
-            <Link
-              href="/read"
-              className="bg-gray-900 text-white font-bold px-6 py-3 text-center hover:bg-gray-700 transition text-sm flex items-center justify-center gap-2"
-            >
+            <Link href="/read" className={btnDark}>
               Read Issue 2 Free <ArrowRight size={14} strokeWidth={2.5} />
             </Link>
             <Link
               href="/subscribe"
-              className="border border-gray-900 text-gray-900 font-bold px-6 py-3 text-center hover:bg-gray-100 transition text-sm flex items-center justify-center gap-2"
+              className="inline-flex items-center justify-center gap-2 rounded-none border border-gray-900 text-gray-900 font-semibold text-sm px-5 py-3 hover:bg-gray-100 transition"
             >
               Subscribe for $5/month <Mail size={14} strokeWidth={2} />
             </Link>
@@ -113,7 +105,7 @@ export default function LandingPage() {
           </p>
           <Link
             href="/subscribe"
-            className="inline-flex items-center gap-2 bg-white text-[#D94550] font-bold px-10 py-3 hover:bg-gray-100 transition text-sm mt-2"
+            className="inline-flex items-center justify-center gap-2 rounded-none bg-white text-[#D94550] font-semibold text-sm px-10 py-3 hover:bg-gray-100 transition mt-2"
           >
             Subscribe Now <ArrowRight size={14} strokeWidth={2.5} />
           </Link>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { inputClass } from './Button';
 
 const PRESETS = [5, 10, 20];
 
@@ -30,22 +31,25 @@ export default function AmountSelector({ value, onChange }: Props) {
     }
   };
 
+  const presetBase =
+    'px-5 py-2.5 rounded-none border font-semibold text-sm transition';
+  const presetActive = 'bg-[#D94550] text-white border-[#D94550]';
+  const presetInactive =
+    'bg-transparent text-white border-gray-700 hover:border-gray-400';
+
   return (
     <div className="space-y-3">
-      <label className="block text-sm font-medium text-gray-700">
-        Monthly amount <span className="text-gray-400">(minimum $5)</span>
-      </label>
+      <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider pb-2 border-b border-gray-800">
+        Monthly amount{' '}
+        <span className="normal-case font-normal text-gray-600">(minimum $5)</span>
+      </p>
       <div className="flex flex-wrap gap-2">
         {PRESETS.map((d) => (
           <button
             key={d}
             type="button"
             onClick={() => selectPreset(d)}
-            className={`px-5 py-2 rounded border font-semibold transition ${
-              !custom && selectedDollars === d
-                ? 'bg-gray-900 text-white border-gray-900'
-                : 'bg-white text-gray-800 border-gray-300 hover:border-gray-500'
-            }`}
+            className={`${presetBase} ${!custom && selectedDollars === d ? presetActive : presetInactive}`}
           >
             ${d}
           </button>
@@ -57,11 +61,7 @@ export default function AmountSelector({ value, onChange }: Props) {
             setInputVal('');
             onChange(500);
           }}
-          className={`px-5 py-2 rounded border font-semibold transition ${
-            custom
-              ? 'bg-gray-900 text-white border-gray-900'
-              : 'bg-white text-gray-800 border-gray-300 hover:border-gray-500'
-          }`}
+          className={`${presetBase} ${custom ? presetActive : presetInactive}`}
         >
           Custom
         </button>
@@ -69,23 +69,23 @@ export default function AmountSelector({ value, onChange }: Props) {
 
       {custom && (
         <div className="flex items-center gap-2">
-          <span className="text-gray-500 text-lg">$</span>
+          <span className="text-gray-500">$</span>
           <input
             type="number"
             min={5}
-            placeholder="Enter amount"
+            placeholder="Amount"
             value={inputVal}
             onChange={handleCustomChange}
-            className="w-32 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-900"
+            className={`${inputClass} w-32`}
             autoFocus
           />
-          <span className="text-gray-500">/month</span>
+          <span className="text-gray-500 text-sm">/month</span>
         </div>
       )}
 
       {!custom && (
         <p className="text-sm text-gray-500">
-          ${selectedDollars}/month — thank you for supporting ComMunity!
+          ${selectedDollars}/month — thank you!
         </p>
       )}
     </div>
