@@ -16,7 +16,9 @@ export default function MagazineViewer() {
   const [pageWidth, setPageWidth] = useState(380);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [fading, setFading] = useState(false);
   const swipeStartX = useRef<number | null>(null);
+  const fadeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const isMobile = pageWidth < 640;
 
@@ -46,14 +48,24 @@ export default function MagazineViewer() {
     setLoading(false);
   };
 
-  const prev = useCallback(
-    () => setCurrentPage((p) => Math.max(1, isMobile ? p - 1 : p - 2)),
-    [isMobile],
-  );
-  const next = useCallback(
-    () => setCurrentPage((p) => Math.min(numPages, isMobile ? p + 1 : p + 2)),
+  // Navigate with a quick opacity fade — fade out, swap page, fade in
+  const navigate = useCallback(
+    (direction: 'prev' | 'next') => {
+      if (fadeTimer.current) clearTimeout(fadeTimer.current);
+      setFading(true);
+      fadeTimer.current = setTimeout(() => {
+        setCurrentPage((p) => {
+          if (direction === 'prev') return Math.max(1, isMobile ? p - 1 : p - 2);
+          return Math.min(numPages, isMobile ? p + 1 : p + 2);
+        });
+        setFading(false);
+      }, 110); // slightly longer than the 100ms CSS transition
+    },
     [isMobile, numPages],
   );
+
+  const prev = useCallback(() => navigate('prev'), [navigate]);
+  const next = useCallback(() => navigate('next'), [navigate]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -108,9 +120,10 @@ export default function MagazineViewer() {
           loading={null}
           className={loading ? 'hidden' : ''}
         >
-          {/* Swipe target wraps the pages */}
+          {/* Fade wrapper + swipe target */}
           <div
             className="flex gap-2 shadow-2xl cursor-grab active:cursor-grabbing"
+            style={{ opacity: fading ? 0 : 1, transition: 'opacity 0.1s ease' }}
             onPointerDown={handlePointerDown}
             onPointerUp={handlePointerUp}
           >
@@ -140,7 +153,7 @@ export default function MagazineViewer() {
           <button
             onClick={prev}
             disabled={currentPage <= 1}
-            className="px-3 py-2 bg-[#D94550] text-white disabled:opacity-30 hover:bg-[#c23a46] transition flex items-center gap-1 text-sm font-semibold"
+            className="px-3 py-2 bg-[#D94550] text-white disabled:opacity-30 hover:bg-[#c23a46] transition flex items-center gap-1 text-sm font-semibold rounded-none"
             aria-label="Previous page"
           >
             <ChevronLeft size={16} strokeWidth={2.5} /> Prev
@@ -153,7 +166,7 @@ export default function MagazineViewer() {
           <button
             onClick={next}
             disabled={currentPage >= numPages}
-            className="px-3 py-2 bg-[#D94550] text-white disabled:opacity-30 hover:bg-[#c23a46] transition flex items-center gap-1 text-sm font-semibold"
+            className="px-3 py-2 bg-[#D94550] text-white disabled:opacity-30 hover:bg-[#c23a46] transition flex items-center gap-1 text-sm font-semibold rounded-none"
             aria-label="Next page"
           >
             Next <ChevronRight size={16} strokeWidth={2.5} />

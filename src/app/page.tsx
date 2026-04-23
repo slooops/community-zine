@@ -49,19 +49,19 @@ export default function LandingPage() {
             copies mailed to you and fund Issue 3.
           </p>
 
-          {/* Buttons — frosted glass row */}
+          {/* Buttons */}
           <div className="flex flex-row gap-2.5 w-full">
             <Link
               href="/read"
-              className="flex-1 flex items-center justify-center gap-2 rounded-none backdrop-blur-md bg-[#D94550]/30 border border-[#D94550]/50 text-white font-semibold text-sm py-3 px-4 hover:bg-[#D94550]/45 transition"
+              className="flex-1 flex items-center justify-center gap-2 rounded-none bg-white text-gray-900 font-semibold text-sm py-3 px-4 hover:bg-gray-100 transition"
             >
               Read Free <ArrowRight size={14} strokeWidth={2.5} />
             </Link>
             <Link
               href="/subscribe"
-              className="flex-1 flex items-center justify-center gap-2 rounded-none backdrop-blur-md bg-white/10 border border-white/20 text-white font-semibold text-sm py-3 px-4 hover:bg-white/[0.16] transition"
+              className="flex-1 flex items-center justify-center gap-2 rounded-none bg-white text-gray-900 font-semibold text-sm py-3 px-4 hover:bg-gray-100 transition"
             >
-              Get Print <Newspaper size={14} strokeWidth={2} />
+              Buy a Print <Newspaper size={14} strokeWidth={2} />
             </Link>
           </div>
 
