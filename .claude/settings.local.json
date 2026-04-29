@@ -83,7 +83,9 @@
       "Bash(vercel link *)",
       "Bash(vercel env *)",
       "Bash(vercel --prod)",
-      "Bash(npm i *)"
+      "Bash(npm i *)",
+      "Bash(node scripts/fetch-gifs.mjs)",
+      "Bash(npx vite *)"
     ]
   }
 }
