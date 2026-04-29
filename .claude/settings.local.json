@@ -62,7 +62,28 @@
       "Bash(curl -s -o /dev/null -w \"/seal-white.png → %{http_code}\\\\n\" http://localhost:3000/seal-white.png)",
       "Bash(curl -s -o /dev/null -w \"/favicon.png → %{http_code}\\\\n\" http://localhost:3000/favicon.png)",
       "Bash(curl -s \"https://t2x9fbqpmx.us-west-2.awsapprunner.com/api/magazine-url\")",
-      "Bash(gh auth *)"
+      "Bash(gh auth *)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "mcp__Claude_in_Chrome__browser_batch",
+      "mcp__Claude_in_Chrome__navigate",
+      "mcp__Claude_in_Chrome__resize_window",
+      "mcp__Claude_in_Chrome__computer",
+      "mcp__Claude_in_Chrome__javascript_tool",
+      "WebSearch",
+      "WebFetch(domain:tenor.com)",
+      "Bash(pkill -f \"vite --port 3000\")",
+      "Bash(git add *)",
+      "mcp__plugin_vercel_vercel__list_deployments",
+      "mcp__plugin_vercel_vercel__get_project",
+      "mcp__supabase__get_project_url",
+      "mcp__supabase__get_publishable_keys",
+      "mcp__supabase__list_tables",
+      "Bash(vercel --version)",
+      "Read(//Users/jasloop/Library/Mobile Documents/com~apple~CloudDocs/Documents/Code/silly-sandbox/**)",
+      "Bash(vercel link *)",
+      "Bash(vercel env *)",
+      "Bash(vercel --prod)",
+      "Bash(npm i *)"
     ]
   }
 }
