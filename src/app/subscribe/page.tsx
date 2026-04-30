@@ -11,8 +11,8 @@ const barlowCondensed = Barlow_Condensed({
 });
 
 export const metadata = {
-  title: 'Subscribe — ComMunity Magazine',
-  description: "Subscribe to ComMunity and get SF's transit magazine delivered to your door.",
+  title: 'Buy a Print Copy — ComMunity Magazine',
+  description: "Buy a print copy of ComMunity and get SF's transit magazine delivered to your door.",
 };
 
 export default function SubscribePage() {
@@ -37,8 +37,8 @@ export default function SubscribePage() {
             Get <em>COMMUNITY</em> in your mailbox
           </h1>
           <p className="text-gray-400 text-base leading-relaxed">
-            Subscribe for $5/month (or more!) and we&apos;ll mail you each print issue.
-            Your support funds the next issue — thank you.
+            Buy a print copy of Issue 2 and we&apos;ll mail it straight to your door.
+            Pay what feels right — every dollar helps fund Issue 3.
           </p>
         </div>
 

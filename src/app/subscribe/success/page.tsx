@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Subscribed! — ComMunity Magazine',
+  title: 'Order confirmed! — ComMunity Magazine',
 };
 
 export default function SuccessPage() {
@@ -9,14 +9,13 @@ export default function SuccessPage() {
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-4">
       <div className="max-w-md w-full text-center space-y-6">
         <div className="text-6xl">🚌</div>
-        <h1 className="text-3xl font-bold text-gray-900">You&apos;re subscribed!</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Order confirmed!</h1>
         <p className="text-gray-600 text-lg">
           Thank you for supporting ComMunity. We&apos;ll get your print copy in the mail soon.
-          Your monthly subscription helps fund Issue 3 — we&apos;re stoked to keep this going.
+          Your purchase helps fund Issue 3 — we&apos;re stoked to keep this going.
         </p>
         <p className="text-gray-500 text-sm">
-          Check your email for a receipt from Stripe. You can cancel anytime from the billing
-          portal link in that email.
+          Check your email for a receipt from Stripe.
         </p>
         <div className="flex flex-col gap-3 pt-2">
           <Link

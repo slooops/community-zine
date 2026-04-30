@@ -10,19 +10,19 @@ export async function sendOwnerNotification(subscriber: Subscriber) {
     .filter(Boolean)
     .join('\n');
 
-  const subject = `New ComMunity subscriber: ${subscriber.name} — $${dollars}/mo`;
+  const subject = `New ComMunity print order: ${subscriber.name} — $${dollars}`;
 
-  const text = `New print subscriber!\n\nName: ${subscriber.name}\nEmail: ${subscriber.email}\nMonthly amount: $${dollars}\n\nMailing address:\n${addressStr}\n\nStripe customer: ${subscriber.stripeCustomerId}\nSubscription: ${subscriber.stripeSubscriptionId}`;
+  const text = `New print order!\n\nName: ${subscriber.name}\nEmail: ${subscriber.email}\nAmount: $${dollars}\n\nMailing address:\n${addressStr}\n\nStripe customer: ${subscriber.stripeCustomerId}\nPayment intent: ${subscriber.stripePaymentIntentId}`;
 
   const html = `
-<h2>New print subscriber!</h2>
+<h2>New print order!</h2>
 <table style="font-family:sans-serif;font-size:14px;border-collapse:collapse">
   <tr><td style="padding:4px 12px 4px 0;font-weight:bold">Name</td><td>${subscriber.name}</td></tr>
   <tr><td style="padding:4px 12px 4px 0;font-weight:bold">Email</td><td>${subscriber.email}</td></tr>
-  <tr><td style="padding:4px 12px 4px 0;font-weight:bold">Monthly amount</td><td>$${dollars}</td></tr>
+  <tr><td style="padding:4px 12px 4px 0;font-weight:bold">Amount</td><td>$${dollars}</td></tr>
   <tr><td style="padding:4px 12px 4px 0;font-weight:bold;vertical-align:top">Mailing address</td><td style="white-space:pre">${addressStr}</td></tr>
   <tr><td style="padding:4px 12px 4px 0;font-weight:bold">Stripe customer</td><td>${subscriber.stripeCustomerId}</td></tr>
-  <tr><td style="padding:4px 12px 4px 0;font-weight:bold">Subscription ID</td><td>${subscriber.stripeSubscriptionId}</td></tr>
+  <tr><td style="padding:4px 12px 4px 0;font-weight:bold">Payment intent</td><td>${subscriber.stripePaymentIntentId}</td></tr>
 </table>`;
 
   await sesClient.send(

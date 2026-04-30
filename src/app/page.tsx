@@ -7,7 +7,7 @@ import { btnDark } from '@/components/Button';
 export const metadata: Metadata = {
   title: "ComMunity — SF's Transit Magazine",
   description:
-    "ComMunity is a free, independent magazine about life on San Francisco's Muni. Read online free, or subscribe to get print copies by mail.",
+    "ComMunity is a free, independent magazine about life on San Francisco's Muni. Read online free, or buy a print copy to support the mag.",
 };
 
 export default function LandingPage() {
@@ -45,8 +45,8 @@ export default function LandingPage() {
           </h1>
 
           <p className="text-gray-300 text-sm leading-relaxed">
-            Issue 2 is out now — free to read online. Subscribe to get print
-            copies mailed to you and fund Issue 3.
+            Issue 2 is out now — free to read online. Love it on paper? Buy a
+            print copy and help fund Issue 3.
           </p>
 
           {/* Buttons */}
@@ -85,8 +85,8 @@ export default function LandingPage() {
             stories, photography, and the culture of getting around the city.
           </p>
           <p className="text-lg text-gray-700 leading-relaxed">
-            Issue 2 is free to read right now. Your subscription goes directly
-            toward printing Issue 3.
+            Issue 2 is free to read right now. Want it on paper? Buy a print
+            copy — your purchase goes directly toward printing Issue 3.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 pt-2">
             <Link href="/read" className={btnDark}>
@@ -96,24 +96,25 @@ export default function LandingPage() {
               href="/subscribe"
               className="inline-flex items-center justify-center gap-2 rounded-none border border-gray-900 text-gray-900 font-semibold text-sm px-5 py-3 hover:bg-gray-100 transition"
             >
-              Subscribe for $5/month <Newspaper size={14} strokeWidth={2} />
+              Buy a Print Copy <Newspaper size={14} strokeWidth={2} />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ── Subscribe CTA ─────────────────────────────────────────── */}
+      {/* ── Buy CTA ───────────────────────────────────────────────── */}
       <section className="bg-[#D94550] text-white py-20 px-4">
         <div className="max-w-xl mx-auto text-center space-y-4">
           <h2 className="text-3xl font-bold">Support local transit journalism</h2>
           <p className="text-lg opacity-90">
-            Starting at $5/month. Get each issue mailed to your door. Cancel anytime.
+            Buy a print copy of Issue 2 — mailed to your door, and every dollar
+            helps fund Issue 3.
           </p>
           <Link
             href="/subscribe"
             className="inline-flex items-center justify-center gap-2 rounded-none bg-white text-[#D94550] font-semibold text-sm px-10 py-3 hover:bg-gray-100 transition mt-2"
           >
-            Subscribe Now <ArrowRight size={14} strokeWidth={2.5} />
+            Buy a Print Copy <ArrowRight size={14} strokeWidth={2.5} />
           </Link>
         </div>
       </section>
@@ -125,7 +126,7 @@ export default function LandingPage() {
         <p className="mt-1">
           <Link href="/read" className="underline hover:text-white transition">Read online</Link>
           {' · '}
-          <Link href="/subscribe" className="underline hover:text-white transition">Subscribe</Link>
+          <Link href="/subscribe" className="underline hover:text-white transition">Buy a print copy</Link>
         </p>
       </footer>
     </div>

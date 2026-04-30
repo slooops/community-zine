@@ -13,9 +13,8 @@ export interface Subscriber {
   address: Address;
   amountCents: number;
   stripeCustomerId: string;
-  stripeSubscriptionId: string;
-  stripePriceId: string;
-  status: 'active' | 'canceled' | 'past_due';
+  stripePaymentIntentId: string;
+  status: 'paid';
   createdAt: string;
   updatedAt: string;
 }

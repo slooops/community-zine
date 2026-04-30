@@ -28,14 +28,14 @@ export default function ReadPage() {
         <MagazineViewer />
       </main>
 
-      {/* Subscribe banner */}
+      {/* Buy banner */}
       <div className="bg-[#D94550] text-white text-center py-3 px-4">
         <p className="text-sm font-semibold">
-          Love the magazine?{' '}
+          Love it on paper?{' '}
           <Link href="/subscribe" className="underline font-bold">
-            Subscribe for $5/month
+            Buy a print copy
           </Link>{' '}
-          and get print copies mailed to your door.
+          and get Issue 2 mailed to your door.
         </p>
       </div>
     </div>

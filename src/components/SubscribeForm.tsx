@@ -177,12 +177,12 @@ export default function SubscribeForm() {
       >
         {loading
           ? 'Redirecting to checkout…'
-          : `Subscribe for $${(form.amountCents / 100).toFixed(0)}/month`}
+          : `Buy a Print Copy — $${(form.amountCents / 100).toFixed(0)}`}
         {!loading && <ArrowRight size={16} strokeWidth={2.5} />}
       </Button>
 
       <p className="text-xs text-gray-600 text-center">
-        Secure payment via Stripe. Cancel anytime. Apple Pay &amp; Google Pay accepted.
+        Secure one-time payment via Stripe. Apple Pay &amp; Google Pay accepted.
       </p>
     </form>
   );

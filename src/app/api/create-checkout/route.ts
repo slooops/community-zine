@@ -37,21 +37,22 @@ export async function POST(req: Request) {
       },
     });
 
-    // Create a Price per checkout — this is the correct pattern for
-    // user-defined recurring amounts (Stripe prices are immutable after creation)
-    const price = await stripe.prices.create({
-      currency: 'usd',
-      unit_amount: body.amountCents,
-      recurring: { interval: 'month' },
-      product_data: {
-        name: 'ComMunity Magazine — Monthly Print Subscription',
-      },
-    });
-
     const session = await stripe.checkout.sessions.create({
       customer: customer.id,
-      mode: 'subscription',
-      line_items: [{ price: price.id, quantity: 1 }],
+      mode: 'payment',
+      line_items: [
+        {
+          quantity: 1,
+          price_data: {
+            currency: 'usd',
+            unit_amount: body.amountCents,
+            product_data: {
+              name: 'ComMunity Magazine — Issue 2 Print Copy',
+              description: 'Physical print copy mailed to your door.',
+            },
+          },
+        },
+      ],
       payment_method_types: ['card'],
       // Apple Pay & Google Pay appear automatically in Stripe Checkout
       // when the user's browser/device supports them

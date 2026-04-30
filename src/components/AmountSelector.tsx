@@ -40,7 +40,7 @@ export default function AmountSelector({ value, onChange }: Props) {
   return (
     <div className="space-y-3">
       <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider pb-2 border-b border-gray-800">
-        Monthly amount{' '}
+        Amount{' '}
         <span className="normal-case font-normal text-gray-600">(minimum $5)</span>
       </p>
       <div className="flex flex-wrap gap-2">
@@ -79,13 +79,13 @@ export default function AmountSelector({ value, onChange }: Props) {
             className={`${inputClass} w-28`}
             autoFocus
           />
-          <span className="text-gray-500 text-sm">/month</span>
+          <span className="text-gray-500 text-sm"></span>
         </div>
       )}
 
       {!custom && (
         <p className="text-sm text-gray-500">
-          ${selectedDollars}/month — thank you!
+          ${selectedDollars} — thank you!
         </p>
       )}
     </div>

@@ -29,16 +29,12 @@ export async function POST(req: Request) {
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session;
 
-    if (session.mode !== 'subscription') {
+    if (session.mode !== 'payment') {
       return new Response('OK', { status: 200 });
     }
 
     try {
-      // Retrieve the subscription to get the confirmed price/amount
-      const subscription = await stripe.subscriptions.retrieve(session.subscription as string);
-      const priceItem = subscription.items.data[0];
-      const amountCents = priceItem.price.unit_amount ?? 500;
-      const priceId = priceItem.price.id;
+      const amountCents = session.amount_total ?? 500;
 
       const subscriber: Subscriber = {
         subscriberId: crypto.randomUUID(),
@@ -53,9 +49,8 @@ export async function POST(req: Request) {
         },
         amountCents,
         stripeCustomerId: session.customer as string,
-        stripeSubscriptionId: session.subscription as string,
-        stripePriceId: priceId,
-        status: 'active',
+        stripePaymentIntentId: session.payment_intent as string,
+        status: 'paid',
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       };
@@ -66,20 +61,10 @@ export async function POST(req: Request) {
 
       await sendOwnerNotification(subscriber);
     } catch (err) {
-      console.error('Failed to process subscription:', err);
+      console.error('Failed to process order:', err);
       // Return 500 so Stripe retries the webhook
       return new Response('Internal error', { status: 500 });
     }
-  }
-
-  // Handle subscription status changes to keep DynamoDB in sync
-  if (
-    event.type === 'customer.subscription.updated' ||
-    event.type === 'customer.subscription.deleted'
-  ) {
-    // Status sync is optional for v1 — log for visibility
-    const sub = event.data.object as Stripe.Subscription;
-    console.log(`Subscription ${sub.id} status: ${sub.status}`);
   }
 
   return new Response('OK', { status: 200 });
