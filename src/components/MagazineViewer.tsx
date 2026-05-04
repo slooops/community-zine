@@ -9,8 +9,10 @@ import 'react-pdf/dist/esm/Page/TextLayer.css';
 // Serve the worker locally from public/ — avoids CDN flakiness and version mismatches
 pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
 
+// US Letter (8.5 × 11 in) aspect ratio
+const LETTER_RATIO = 11 / 8.5;
+
 export default function MagazineViewer() {
-  const [pdfUrl, setPdfUrl] = useState<string | null>(null);
   const [numPages, setNumPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageWidth, setPageWidth] = useState(380);
@@ -19,16 +21,6 @@ export default function MagazineViewer() {
   const swipeStartX = useRef<number | null>(null);
 
   const isMobile = pageWidth < 640;
-
-  useEffect(() => {
-    fetch('/api/magazine-url')
-      .then((r) => r.json())
-      .then((d) => {
-        if (d.url) setPdfUrl(d.url);
-        else setError('Could not load magazine.');
-      })
-      .catch(() => setError('Could not load magazine.'));
-  }, []);
 
   const updateWidth = useCallback(() => {
     const w = window.innerWidth;
@@ -86,7 +78,7 @@ export default function MagazineViewer() {
     );
   }
 
-  const pageHeight = pageWidth * 1.414;
+  const pageHeight = Math.round(pageWidth * LETTER_RATIO);
   const pagesToShow = isMobile
     ? [currentPage]
     : [currentPage, currentPage + 1].filter((p) => p <= numPages);
@@ -101,10 +93,14 @@ export default function MagazineViewer() {
         />
       )}
 
-      {pdfUrl && (
-        <Document
-          file={pdfUrl}
+      <Document
+          file="/api/magazine-url"
           onLoadSuccess={onLoadSuccess}
+          onLoadError={(err) => {
+            console.error('PDF load error:', err);
+            setError('Could not load magazine. Please try refreshing.');
+            setLoading(false);
+          }}
           loading={null}
           className={loading ? 'hidden' : ''}
         >
@@ -131,7 +127,6 @@ export default function MagazineViewer() {
             ))}
           </div>
         </Document>
-      )}
 
       {/* Navigation controls */}
       {numPages > 0 && (

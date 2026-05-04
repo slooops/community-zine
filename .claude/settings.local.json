@@ -89,7 +89,9 @@
       "Bash(curl -s \"https://api.giphy.com/v1/gifs/search?api_key=L4IUOC5mTtnrEw2VUqqsPfzefyuKQuaI&q=ron+swanson+father+dad&limit=5&rating=pg-13\")",
       "Bash(xargs cat *)",
       "mcp__supabase__execute_sql",
-      "mcp__plugin_vercel_vercel__list_projects"
+      "mcp__plugin_vercel_vercel__list_projects",
+      "Bash(vercel --prod --yes)",
+      "Bash(node -e ' *)"
     ]
   }
 }
