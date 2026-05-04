@@ -114,7 +114,7 @@ export default function MagazineViewer() {
               <div
                 key={pageNum}
                 className="bg-white overflow-hidden"
-                style={{ width: pageWidth, height: pageHeight, flexShrink: 0 }}
+                style={{ width: pageWidth, flexShrink: 0 }}
               >
                 <Page
                   pageNumber={pageNum}
