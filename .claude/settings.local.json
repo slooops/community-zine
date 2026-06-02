@@ -94,7 +94,16 @@
       "Bash(node -e ' *)",
       "mcp__c447125a-1922-491f-bd94-920d3b07c3dc__list_teams",
       "mcp__c447125a-1922-491f-bd94-920d3b07c3dc__get_project",
-      "mcp__c447125a-1922-491f-bd94-920d3b07c3dc__get_deployment"
+      "mcp__c447125a-1922-491f-bd94-920d3b07c3dc__get_deployment",
+      "Bash(npx neonctl@latest init)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(json.dumps\\({k:v for k,v in d.items\\(\\) if k in ['mcpServers','plugins']}, indent=2\\)\\)\")",
+      "mcp__Neon__list_projects",
+      "mcp__Neon__create_project",
+      "mcp__Neon__describe_project",
+      "mcp__Neon__get_database_tables",
+      "mcp__Neon__run_sql",
+      "mcp__Neon__run_sql_transaction",
+      "mcp__Neon__get_connection_string"
     ]
   }
 }
