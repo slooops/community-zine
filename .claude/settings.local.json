@@ -91,7 +91,10 @@
       "mcp__supabase__execute_sql",
       "mcp__plugin_vercel_vercel__list_projects",
       "Bash(vercel --prod --yes)",
-      "Bash(node -e ' *)"
+      "Bash(node -e ' *)",
+      "mcp__c447125a-1922-491f-bd94-920d3b07c3dc__list_teams",
+      "mcp__c447125a-1922-491f-bd94-920d3b07c3dc__get_project",
+      "mcp__c447125a-1922-491f-bd94-920d3b07c3dc__get_deployment"
     ]
   }
 }
