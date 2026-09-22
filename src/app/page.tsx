@@ -44,7 +44,7 @@ export default function LandingPage() {
           </h1>
 
           <p className="text-gray-300 text-sm leading-relaxed">
-            Issue 2 is out now — free to read online.
+            Issue 3 is out now — free to read online.
           </p>
 
           <Link
@@ -70,11 +70,11 @@ export default function LandingPage() {
             stories, photography, and the culture of getting around the city.
           </p>
           <p className="text-lg text-gray-700 leading-relaxed">
-            Issue 2 is free to read right now.
+            Issue 3 is free to read right now.
           </p>
           <div className="pt-2">
             <Link href="/read" className={btnDark}>
-              Read Issue 2 Free <ArrowRight size={14} strokeWidth={2.5} />
+              Read Issue 3 Free <ArrowRight size={14} strokeWidth={2.5} />
             </Link>
           </div>
         </div>

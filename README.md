@@ -4,7 +4,7 @@
   <p>
     <a href="https://community-zine.vercel.app">🚌 Live site</a>
     &nbsp;·&nbsp;
-    <a href="https://community-zine.vercel.app/read">Read Issue 2</a>
+    <a href="https://community-zine.vercel.app/read">Read Issue 3</a>
     &nbsp;·&nbsp;
     <a href="https://community-zine.vercel.app/subscribe">Get a Print Copy</a>
   </p>
@@ -12,7 +12,7 @@
 
 ---
 
-ComMunity is a free, independent print magazine about life on San Francisco's Muni — the buses, trains, cable cars, and the people who ride them every day. This repo is the website: read Issue 2 free online, or buy a print copy to get it mailed to your door.
+ComMunity is a free, independent print magazine about life on San Francisco's Muni — the buses, trains, cable cars, and the people who ride them every day. This repo is the website: read Issue 3 free online, or buy a print copy to get it mailed to your door.
 
 ## Stack
 

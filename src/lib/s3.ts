@@ -6,7 +6,7 @@ const s3Client = new S3Client({ region: process.env.S3_REGION ?? process.env.AWS
 export async function getMagazinePresignedUrl(): Promise<string> {
   const command = new GetObjectCommand({
     Bucket: process.env.S3_BUCKET_NAME!,
-    Key: 'community-issue-2.pdf',
+    Key: 'community-issue-3.pdf',
   });
   return getSignedUrl(s3Client, command, { expiresIn: 900 }); // 15 minutes
 }

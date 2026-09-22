@@ -9,7 +9,7 @@ export async function GET() {
     const client = new S3Client({ region: process.env.AWS_REGION ?? 'us-east-1' });
     const command = new GetObjectCommand({
       Bucket: process.env.S3_BUCKET_NAME!,
-      Key: 'community-issue-2.pdf',
+      Key: 'community-issue-3.pdf',
     });
     const s3Response = await client.send(command);
 
