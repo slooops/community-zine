@@ -1,0 +1,27 @@
+src/app/api/magazine-url/route.ts
+  s_340d0bd4f8007d::t_ea4e83ae14e577 12
+README.md
+  s_340d0bd4f8007d::t_028258781faaab 15
+  s_340d0bd4f8007d::t_d36439e0a2a6da 7
+src/app/page.tsx
+  s_340d0bd4f8007d::t_645d47dca7acf7 47
+  s_340d0bd4f8007d::t_1a84a2a468281e 73,77
+src/lib/s3.ts
+  s_340d0bd4f8007d::t_fae845d6e71ea0 9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "72a29ad375c60b9d3ede92596a2300fc66ab91f4",
+  "prompts": {},
+  "sessions": {
+    "s_340d0bd4f8007d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "afc7986a-02f4-4f44-aaeb-5d1aa0195f03",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "jack <82819874+slooops@users.noreply.github.com>"
+    }
+  }
+}
