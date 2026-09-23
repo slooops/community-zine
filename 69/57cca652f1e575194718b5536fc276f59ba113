@@ -1,0 +1,36 @@
+src/app/read/page.tsx
+  s_340d0bd4f8007d::t_38432f2f23a28f 7-10,17-18
+  s_340d0bd4f8007d::t_967761d940765d 3,11-15,27,32
+  s_340d0bd4f8007d::t_567c6dadbebbac 16
+src/components/MagazineViewer.tsx
+  s_340d0bd4f8007d::t_4cd17ba9167d2d 15
+  s_340d0bd4f8007d::t_123d2c05369cb5 36-43
+  s_340d0bd4f8007d::t_bd299de1f97feb 105
+src/app/api/magazine-url/route.ts
+  s_340d0bd4f8007d::t_9bba5c46b9d8dc 2,8,10,14
+src/lib/issues.ts
+  s_340d0bd4f8007d::t_e5e9de996ef5b1 1-17
+src/lib/s3.ts
+  s_340d0bd4f8007d::t_6fa6e27d1fcde4 3,7,10
+src/app/page.tsx
+  s_340d0bd4f8007d::t_f4af05d39cfa66 6
+  s_340d0bd4f8007d::t_de2ea13e6f5fa9 87-95
+  s_340d0bd4f8007d::t_a3eea956397934 83,85-86,96-98
+  s_340d0bd4f8007d::t_d76a78e2bbe418 51-65
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "6957cca652f1e575194718b5536fc276f59ba113",
+  "prompts": {},
+  "sessions": {
+    "s_340d0bd4f8007d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "afc7986a-02f4-4f44-aaeb-5d1aa0195f03",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "jack <82819874+slooops@users.noreply.github.com>"
+    }
+  }
+}
