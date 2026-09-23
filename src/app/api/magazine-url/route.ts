@@ -1,15 +1,17 @@
 import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3';
+import { getIssue } from '@/lib/issues';
 
 // Force dynamic so Next.js never statically caches this route —
 // the PDF must be fetched fresh on every request.
 export const dynamic = 'force-dynamic';
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const issueSlug = new URL(request.url).searchParams.get('issue');
     const client = new S3Client({ region: process.env.AWS_REGION ?? 'us-east-1' });
     const command = new GetObjectCommand({
       Bucket: process.env.S3_BUCKET_NAME!,
-      Key: 'community-issue-3.pdf',
+      Key: getIssue(issueSlug).s3Key,
     });
     const s3Response = await client.send(command);
 

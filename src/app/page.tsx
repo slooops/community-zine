@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import type { Metadata } from 'next';
 import { btnDark } from '@/components/Button';
+import { ISSUES } from '@/lib/issues';
 
 export const metadata: Metadata = {
   title: "ComMunity — SF's Transit Magazine",
@@ -47,12 +48,21 @@ export default function LandingPage() {
             Issue 3 is out now — free to read online.
           </p>
 
-          <Link
-            href="/read"
-            className="w-full flex items-center justify-center gap-2 rounded-none bg-white text-gray-900 font-semibold text-sm py-3 px-4 hover:bg-gray-100 transition"
-          >
-            Read Free <ArrowRight size={14} strokeWidth={2.5} />
-          </Link>
+          <div className="w-full flex flex-col gap-2.5">
+            {ISSUES.map((issue, i) => (
+              <Link
+                key={issue.slug}
+                href={`/read?issue=${issue.slug}`}
+                className={
+                  i === 0
+                    ? 'w-full flex items-center justify-center gap-2 rounded-none bg-white text-gray-900 font-semibold text-sm py-3 px-4 hover:bg-gray-100 transition'
+                    : 'w-full flex items-center justify-center gap-2 rounded-none border border-white/40 text-white font-semibold text-sm py-3 px-4 hover:border-white transition'
+                }
+              >
+                Read {issue.label} <ArrowRight size={14} strokeWidth={2.5} />
+              </Link>
+            ))}
+          </div>
         </div>
 
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-gray-500 text-xs animate-bounce">
@@ -70,12 +80,22 @@ export default function LandingPage() {
             stories, photography, and the culture of getting around the city.
           </p>
           <p className="text-lg text-gray-700 leading-relaxed">
-            Issue 3 is free to read right now.
+            Both issues are free to read right now.
           </p>
-          <div className="pt-2">
-            <Link href="/read" className={btnDark}>
-              Read Issue 3 Free <ArrowRight size={14} strokeWidth={2.5} />
-            </Link>
+          <div className="pt-2 flex flex-wrap gap-3">
+            {ISSUES.map((issue, i) => (
+              <Link
+                key={issue.slug}
+                href={`/read?issue=${issue.slug}`}
+                className={
+                  i === 0
+                    ? btnDark
+                    : 'inline-flex items-center justify-center gap-2 rounded-none border border-gray-900 text-gray-900 font-semibold text-sm px-5 py-3 hover:bg-gray-900 hover:text-white transition'
+                }
+              >
+                Read {issue.label} <ArrowRight size={14} strokeWidth={2.5} />
+              </Link>
+            ))}
           </div>
         </div>
       </section>

@@ -12,7 +12,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
 // US Letter (8.5 × 11 in) aspect ratio
 const LETTER_RATIO = 11 / 8.5;
 
-export default function MagazineViewer() {
+export default function MagazineViewer({ issueSlug }: { issueSlug: string }) {
   const [numPages, setNumPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageWidth, setPageWidth] = useState(380);
@@ -32,6 +32,14 @@ export default function MagazineViewer() {
     window.addEventListener('resize', updateWidth);
     return () => window.removeEventListener('resize', updateWidth);
   }, [updateWidth]);
+
+  // Reset viewer state when switching issues
+  useEffect(() => {
+    setNumPages(0);
+    setCurrentPage(1);
+    setLoading(true);
+    setError(null);
+  }, [issueSlug]);
 
   const onLoadSuccess = ({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
@@ -94,7 +102,7 @@ export default function MagazineViewer() {
       )}
 
       <Document
-          file="/api/magazine-url"
+          file={`/api/magazine-url?issue=${issueSlug}`}
           onLoadSuccess={onLoadSuccess}
           onLoadError={(err) => {
             console.error('PDF load error:', err);
