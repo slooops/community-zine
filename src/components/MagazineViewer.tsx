@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
@@ -12,18 +12,36 @@ pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
 // US Letter (8.5 × 11 in) aspect ratio
 const LETTER_RATIO = 11 / 8.5;
 
+// Book-style pagination: page 1 (the cover) stands alone, then facing pages
+// pair up as 2-3, 4-5, 6-7, ... A trailing unpaired page (the back cover)
+// also stands alone. On mobile every page stands alone.
+function buildSpreads(numPages: number, isMobile: boolean): number[][] {
+  if (numPages <= 0) return [];
+  if (isMobile) return Array.from({ length: numPages }, (_, i) => [i + 1]);
+
+  const spreads: number[][] = [[1]];
+  for (let p = 2; p <= numPages; p += 2) {
+    spreads.push(p + 1 <= numPages ? [p, p + 1] : [p]);
+  }
+  return spreads;
+}
+
 export default function MagazineViewer({ issueSlug }: { issueSlug: string }) {
   const [numPages, setNumPages] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [spreadIndex, setSpreadIndex] = useState(0);
+  const [viewportWidth, setViewportWidth] = useState(1024);
   const [pageWidth, setPageWidth] = useState(380);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const swipeStartX = useRef<number | null>(null);
 
-  const isMobile = pageWidth < 640;
+  // Below the `sm` breakpoint: phones. At or above it: tablet/desktop, wide
+  // enough to show facing pages side by side.
+  const isMobile = viewportWidth < 640;
 
   const updateWidth = useCallback(() => {
     const w = window.innerWidth;
+    setViewportWidth(w);
     setPageWidth(Math.min(w < 640 ? w - 32 : Math.floor(w / 2) - 48, 520));
   }, []);
 
@@ -36,23 +54,27 @@ export default function MagazineViewer({ issueSlug }: { issueSlug: string }) {
   // Reset viewer state when switching issues
   useEffect(() => {
     setNumPages(0);
-    setCurrentPage(1);
+    setSpreadIndex(0);
     setLoading(true);
     setError(null);
   }, [issueSlug]);
 
+  const spreads = useMemo(() => buildSpreads(numPages, isMobile), [numPages, isMobile]);
+  const pagesToShow = spreads[spreadIndex] ?? [];
+
   const onLoadSuccess = ({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
+    setSpreadIndex(0);
     setLoading(false);
   };
 
   const prev = useCallback(
-    () => setCurrentPage((p) => Math.max(1, isMobile ? p - 1 : p - 2)),
-    [isMobile],
+    () => setSpreadIndex((i) => Math.max(0, i - 1)),
+    [],
   );
   const next = useCallback(
-    () => setCurrentPage((p) => Math.min(numPages, isMobile ? p + 1 : p + 2)),
-    [isMobile, numPages],
+    () => setSpreadIndex((i) => Math.min(spreads.length - 1, i + 1)),
+    [spreads.length],
   );
 
   // Keyboard navigation
@@ -87,17 +109,14 @@ export default function MagazineViewer({ issueSlug }: { issueSlug: string }) {
   }
 
   const pageHeight = Math.round(pageWidth * LETTER_RATIO);
-  const pagesToShow = isMobile
-    ? [currentPage]
-    : [currentPage, currentPage + 1].filter((p) => p <= numPages);
 
   return (
     <div className="flex flex-col items-center gap-4 select-none">
-      {/* Loading skeleton */}
+      {/* Loading skeleton — the opening view is always a single page (the cover) */}
       {loading && (
         <div
           className="bg-gray-800 animate-pulse"
-          style={{ width: isMobile ? pageWidth : pageWidth * 2 + 8, height: pageHeight }}
+          style={{ width: pageWidth, height: pageHeight }}
         />
       )}
 
@@ -141,20 +160,20 @@ export default function MagazineViewer({ issueSlug }: { issueSlug: string }) {
         <div className="flex items-center gap-6 mt-2">
           <button
             onClick={prev}
-            disabled={currentPage <= 1}
+            disabled={spreadIndex <= 0}
             className="px-3 py-2 bg-[#D94550] text-white disabled:opacity-30 hover:bg-[#c23a46] transition flex items-center gap-1 text-sm font-semibold rounded-none"
             aria-label="Previous page"
           >
             <ChevronLeft size={16} strokeWidth={2.5} /> Prev
           </button>
           <span className="text-sm text-gray-400 tabular-nums">
-            {isMobile
-              ? `${currentPage} / ${numPages}`
-              : `${currentPage}–${Math.min(currentPage + 1, numPages)} / ${numPages}`}
+            {pagesToShow.length === 2
+              ? `${pagesToShow[0]}–${pagesToShow[1]}`
+              : `${pagesToShow[0]}`} / {numPages}
           </span>
           <button
             onClick={next}
-            disabled={currentPage >= numPages}
+            disabled={spreadIndex >= spreads.length - 1}
             className="px-3 py-2 bg-[#D94550] text-white disabled:opacity-30 hover:bg-[#c23a46] transition flex items-center gap-1 text-sm font-semibold rounded-none"
             aria-label="Next page"
           >
