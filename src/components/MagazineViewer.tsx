@@ -26,6 +26,29 @@ function buildSpreads(numPages: number, isMobile: boolean): number[][] {
   return spreads;
 }
 
+// Each page's canvas paints asynchronously, so the two halves of a spread
+// can pop in at slightly different moments. Fading each one in on its own
+// render — rather than a shared spread-level flag — smooths that over
+// without making one side wait on the other.
+function FadingPage({ pageNumber, width }: { pageNumber: number; width: number }) {
+  const [rendered, setRendered] = useState(false);
+  return (
+    <div
+      className="bg-white overflow-hidden transition-opacity duration-300 ease-out"
+      style={{ width, flexShrink: 0, opacity: rendered ? 1 : 0 }}
+    >
+      <Page
+        pageNumber={pageNumber}
+        width={width}
+        renderAnnotationLayer={false}
+        renderTextLayer={false}
+        loading={null}
+        onRenderSuccess={() => setRendered(true)}
+      />
+    </div>
+  );
+}
+
 export default function MagazineViewer({ issueSlug }: { issueSlug: string }) {
   const [numPages, setNumPages] = useState(0);
   const [spreadIndex, setSpreadIndex] = useState(0);
@@ -138,19 +161,7 @@ export default function MagazineViewer({ issueSlug }: { issueSlug: string }) {
             onPointerUp={handlePointerUp}
           >
             {pagesToShow.map((pageNum) => (
-              <div
-                key={pageNum}
-                className="bg-white overflow-hidden"
-                style={{ width: pageWidth, flexShrink: 0 }}
-              >
-                <Page
-                  pageNumber={pageNum}
-                  width={pageWidth}
-                  renderAnnotationLayer={false}
-                  renderTextLayer={false}
-                  loading={null}
-                />
-              </div>
+              <FadingPage key={pageNum} pageNumber={pageNum} width={pageWidth} />
             ))}
           </div>
         </Document>
